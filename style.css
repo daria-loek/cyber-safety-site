@@ -1,0 +1,587 @@
+/* Общие стили */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    line-height: 1.8;
+    color: #333;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 80px;
+}
+
+/* Шапка и навигация */
+header {
+    background: var(--gradient-bg);
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--warning-color));
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+}
+
+.nav-menu li {
+    margin: 0.5rem;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+}
+
+.nav-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: white;
+    transform: scale(1.05);
+}
+
+/* Специальные кнопки */
+.nav-menu a.special-btn {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    color: var(--dark-color);
+    border: none;
+}
+
+.nav-menu a.special-btn:hover {
+    background: linear-gradient(45deg, #ff7b7e, #f8b8a8);
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+    font-size: 2.2rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+/* Основной контент */
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+}
+
+/* Большие секции */
+section {
+    background: white;
+    padding: 3rem;
+    margin-bottom: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Стили для страницы с правилами */
+.rule-list {
+    list-style-type: none;
+    counter-reset: rule-counter;
+    padding: 1rem 0;
+}
+
+/* КАРТОЧКИ ПРАВИЛ - без красной подсветки при наведении */
+.rule-list li {
+    counter-increment: rule-counter;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    padding-left: 4rem;
+    position: relative;
+    background: linear-gradient(145deg, #f8f9fa, #ffffff);
+    border-radius: 15px;
+    border-left: 5px solid var(--secondary-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* ИЗМЕНЕНО: убрана красная подсветка, оставлено только смещение */
+.rule-list li:hover {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    transform: translateX(10px);
+    /* УБРАНО: border-left-color: var(--accent-color); */
+}
+
+.rule-list li::before {
+    content: counter(rule-counter);
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: -1.5rem;
+    top: 2rem;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+/* Стили для теста */
+.quiz-intro {
+    text-align: center;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+}
+
+.quiz-intro h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.quiz-intro p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+/* КАРТОЧКИ ВОПРОСОВ - без красной подсветки */
+.question {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background: linear-gradient(145deg, #f8f9fa, #ffffff);
+    border-radius: 15px;
+    border-left: 5px solid var(--secondary-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ИЗМЕНЕНО: убрана красная подсветка */
+.question:hover {
+    /* УБРАНО: border-left-color: var(--accent-color); */
+    transform: translateX(5px);
+}
+
+.question::before {
+    content: attr(data-question-number);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--secondary-color);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.question p {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding-right: 40px;
+}
+
+/* ОТВЕТЫ В ВОПРОСАХ - без красной подсветки */
+.question label {
+    display: block;
+    margin: 1rem 0;
+    padding: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    border: 2px solid #e0e0e0;
+    position: relative;
+    padding-left: 3.5rem;
+}
+
+/* ИЗМЕНЕНО: убрана красная подсветка при наведении */
+.question label:hover {
+    background: #f8f9fa;
+    /* УБРАНО: border-color: var(--secondary-color); */
+    transform: translateX(5px);
+}
+
+.question input[type="radio"] {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.3rem;
+    height: 1.3rem;
+    cursor: pointer;
+}
+
+.question input[type="radio"]:checked + label {
+    background: #e8f4fc;
+    border-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.question input[type="radio"]:checked + label::before {
+    content: '✓';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* КНОПКИ */
+button {
+    background: linear-gradient(45deg, var(--secondary-color), #2980b9);
+    color: white;
+    border: none;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    margin: 1rem 0.5rem;
+    min-width: 180px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+    background: linear-gradient(45deg, #2980b9, var(--secondary-color));
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+button.secondary {
+    background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+}
+
+button.secondary:hover {
+    background: linear-gradient(45deg, #7f8c8d, #95a5a6);
+}
+
+button.success {
+    background: linear-gradient(45deg, var(--success-color), #229954);
+}
+
+button.success:hover {
+    background: linear-gradient(45deg, #229954, var(--success-color));
+}
+
+/* Блок результатов теста */
+#quizResult {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 3rem;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 20px;
+    border-left: 5px solid var(--secondary-color);
+    box-shadow: var(--card-shadow);
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(var(--success-color) 0% calc(var(--score-percent) * 1%), #ecf0f1 calc(var(--score-percent) * 1%) 100%);
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.score-circle::before {
+    content: '';
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background: white;
+    border-radius: 50%;
+}
+
+.score-circle span {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+}
+
+#resultText {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.correct-answer {
+    background: #d4edda;
+    border-left: 4px solid var(--success-color);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+}
+
+.wrong-answer {
+    background: #f8d7da;
+    border-left: 4px solid var(--accent-color);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+}
+
+/* Подвал */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--primary-color);
+    color: var(--light-color);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 4px solid var(--secondary-color);
+}
+
+footer p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes progressFill {
+    from { width: 0; }
+    to { width: var(--score-percent); }
+}
+
+.progress-bar {
+    height: 10px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    border-radius: 5px;
+    animation: progressFill 1.5s ease-out;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .nav-menu li {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .nav-menu a {
+        display: block;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    section {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    
+    .rule-list li {
+        padding: 1.5rem;
+        padding-left: 3.5rem;
+    }
+    
+    .rule-list li::before {
+        width: 2.5rem;
+        height: 2.5rem;
+        left: -1.25rem;
+        font-size: 1rem;
+    }
+    
+    .question {
+        padding: 1.5rem;
+    }
+    
+    button {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+    
+    .score-circle {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .score-circle::before {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .score-circle span {
+        font-size: 2rem;
+    }
+}
+
+/* Иконки */
+.icon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Счетчик вопросов */
+.question-counter {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Декоративные элементы - ВОЗВРАЩЕНЫ */
+.decoration {
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.decoration-1 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(45deg, rgba(52, 152, 219, 0.03), rgba(231, 76, 60, 0.03));
+    border-radius: 50%;
+    top: 10%;
+    right: 10%;
+    opacity: 0.5;
+}
+
+.decoration-2 {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg, rgba(155, 89, 182, 0.03), rgba(52, 152, 219, 0.03));
+    border-radius: 50%;
+    bottom: 20%;
+    left: 5%;
+    opacity: 0.5;
+}
+
+/* Ссылки в тексте */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Для страницы с тестом - дополнительный отступ */
+.quiz-page main {
+    padding-bottom: 60px;
+}
