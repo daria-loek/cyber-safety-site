@@ -26,7 +26,6 @@ body {
     min-height: 100vh;
     position: relative;
     padding-bottom: 80px;
-    overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
 }
 
 /* Шапка и навигация */
@@ -67,7 +66,7 @@ header::before {
 .nav-menu a {
     color: white;
     text-decoration: none;
-    padding: 0.8rem 1.2rem;
+    padding: 0.8rem 1.8rem;
     border-radius: 50px;
     background-color: rgba(255, 255, 255, 0.15);
     transition: all 0.3s ease;
@@ -76,7 +75,6 @@ header::before {
     font-weight: 600;
     letter-spacing: 0.5px;
     backdrop-filter: blur(10px);
-    font-size: 0.9rem;
 }
 
 .nav-menu a:hover {
@@ -97,10 +95,9 @@ header::before {
 }
 
 h1 {
-    font-size: 2.2rem;
+    font-size: 2.8rem;
     margin-bottom: 0.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 0 1rem;
 }
 
 h2 {
@@ -108,7 +105,7 @@ h2 {
     margin-bottom: 1.5rem;
     position: relative;
     padding-bottom: 10px;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
 }
 
 h2::after {
@@ -126,68 +123,63 @@ h2::after {
 main {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 15px 40px;
-    width: 100%;
+    padding: 0 20px 40px;
 }
 
 /* Большие секции */
 section {
     background: white;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border-radius: 15px;
+    padding: 3rem;
+    margin-bottom: 2.5rem;
+    border-radius: 20px;
     box-shadow: var(--card-shadow);
     border: 1px solid rgba(0,0,0,0.05);
-    width: 100%;
-    overflow: hidden;
 }
 
 /* Стили для страницы с правилами */
 .rule-list {
     list-style-type: none;
     counter-reset: rule-counter;
-    padding: 0.5rem 0;
+    padding: 1rem 0;
 }
 
-/* КАРТОЧКИ ПРАВИЛ - исправлено для мобильных */
+/* КАРТОЧКИ ПРАВИЛ - без красной подсветки при наведении */
 .rule-list li {
     counter-increment: rule-counter;
-    margin-bottom: 1.5rem;
-    padding: 1.5rem;
-    padding-left: 2.5rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    padding-left: 4rem;
     position: relative;
     background: linear-gradient(145deg, #f8f9fa, #ffffff);
-    border-radius: 12px;
-    border-left: 4px solid var(--secondary-color);
+    border-radius: 15px;
+    border-left: 5px solid var(--secondary-color);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* Убрали выносной элемент на мобильных */
+/* ИЗМЕНЕНО: убрана красная подсветка, оставлено только смещение */
+.rule-list li:hover {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    transform: translateX(10px);
+    /* УБРАНО: border-left-color: var(--accent-color); */
+}
+
 .rule-list li::before {
     content: counter(rule-counter);
     background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
     color: white;
     font-weight: bold;
     border-radius: 50%;
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 3rem;
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    left: 0.8rem;
-    top: 1.5rem;
-    font-size: 1rem;
-    box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
-}
-
-.rule-list li:hover {
-    background: linear-gradient(145deg, #ffffff, #f8f9fa);
-    transform: translateX(5px);
+    left: -1.5rem;
+    top: 2rem;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
 }
 
 /* Стили для теста */
@@ -197,32 +189,32 @@ section {
 }
 
 .quiz-intro h2 {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
 .quiz-intro p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #666;
     margin-bottom: 0.5rem;
-    line-height: 1.6;
 }
 
-/* КАРТОЧКИ ВОПРОСОВ - исправлено для мобильных */
+/* КАРТОЧКИ ВОПРОСОВ - без красной подсветки */
 .question {
-    margin-bottom: 1.5rem;
-    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding: 2rem;
     background: linear-gradient(145deg, #f8f9fa, #ffffff);
-    border-radius: 12px;
-    border-left: 4px solid var(--secondary-color);
+    border-radius: 15px;
+    border-left: 5px solid var(--secondary-color);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    width: 100%;
 }
 
+/* ИЗМЕНЕНО: убрана красная подсветка */
 .question:hover {
+    /* УБРАНО: border-left-color: var(--accent-color); */
     transform: translateX(5px);
 }
 
@@ -233,57 +225,52 @@ section {
     right: 10px;
     background: var(--secondary-color);
     color: white;
-    width: 28px;
-    height: 28px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .question p {
     font-weight: 600;
     color: var(--primary-color);
-    font-size: 1.1rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
     padding-right: 40px;
-    line-height: 1.5;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
-/* ОТВЕТЫ В ВОПРОСАХ - исправлено для мобильных */
+/* ОТВЕТЫ В ВОПРОСАХ - без красной подсветки */
 .question label {
     display: block;
-    margin: 0.8rem 0;
-    padding: 1rem;
-    border-radius: 8px;
+    margin: 1rem 0;
+    padding: 1.2rem;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
     background: white;
     border: 2px solid #e0e0e0;
     position: relative;
-    padding-left: 2.8rem;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    padding-left: 3.5rem;
 }
 
+/* ИЗМЕНЕНО: убрана красная подсветка при наведении */
 .question label:hover {
     background: #f8f9fa;
-    transform: translateX(3px);
+    /* УБРАНО: border-color: var(--secondary-color); */
+    transform: translateX(5px);
 }
 
 .question input[type="radio"] {
     position: absolute;
-    left: 0.8rem;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1.3rem;
+    height: 1.3rem;
     cursor: pointer;
 }
 
@@ -297,7 +284,7 @@ section {
 .question input[type="radio"]:checked + label::before {
     content: '✓';
     position: absolute;
-    left: 0.8rem;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--secondary-color);
@@ -309,18 +296,16 @@ button {
     background: linear-gradient(45deg, var(--secondary-color), #2980b9);
     color: white;
     border: none;
-    padding: 1rem 1.8rem;
-    font-size: 1rem;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-    margin: 0.8rem 0.3rem;
-    min-width: 160px;
-    width: auto;
-    display: inline-block;
+    margin: 1rem 0.5rem;
+    min-width: 180px;
 }
 
 button:hover {
@@ -351,40 +336,39 @@ button.success:hover {
 
 /* Блок результатов теста */
 #quizResult {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    padding: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 3rem;
     background: linear-gradient(145deg, #ffffff, #f8f9fa);
-    border-radius: 15px;
-    border-left: 4px solid var(--secondary-color);
+    border-radius: 20px;
+    border-left: 5px solid var(--secondary-color);
     box-shadow: var(--card-shadow);
-    width: 100%;
 }
 
 .score-circle {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background: conic-gradient(var(--success-color) 0% calc(var(--score-percent) * 1%), #ecf0f1 calc(var(--score-percent) * 1%) 100%);
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .score-circle::before {
     content: '';
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     background: white;
     border-radius: 50%;
 }
 
 .score-circle span {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 800;
     color: var(--primary-color);
     position: relative;
@@ -392,36 +376,32 @@ button.success:hover {
 }
 
 #resultText {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin: 1.2rem 0;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 1.5rem 0;
     text-align: center;
 }
 
 .correct-answer {
     background: #d4edda;
     border-left: 4px solid var(--success-color);
-    padding: 0.8rem;
-    margin: 0.4rem 0;
+    padding: 1rem;
+    margin: 0.5rem 0;
     border-radius: 8px;
-    font-size: 0.95rem;
-    line-height: 1.5;
 }
 
 .wrong-answer {
     background: #f8d7da;
     border-left: 4px solid var(--accent-color);
-    padding: 0.8rem;
-    margin: 0.4rem 0;
+    padding: 1rem;
+    margin: 0.5rem 0;
     border-radius: 8px;
-    font-size: 0.95rem;
-    line-height: 1.5;
 }
 
 /* Подвал */
 footer {
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem;
     background: var(--primary-color);
     color: var(--light-color);
     width: 100%;
@@ -429,12 +409,11 @@ footer {
     bottom: 0;
     left: 0;
     border-top: 4px solid var(--secondary-color);
-    font-size: 0.9rem;
 }
 
 footer p {
+    font-size: 1rem;
     opacity: 0.9;
-    padding: 0 1rem;
 }
 
 /* Анимации */
@@ -456,8 +435,8 @@ footer p {
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-    20%, 40%, 60%, 80% { transform: translateX(8px); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
 @keyframes progressFill {
@@ -466,7 +445,7 @@ footer p {
 }
 
 .progress-bar {
-    height: 8px;
+    height: 10px;
     background: #ecf0f1;
     border-radius: 5px;
     margin: 1rem 0;
@@ -480,205 +459,78 @@ footer p {
     animation: progressFill 1.5s ease-out;
 }
 
-/* Адаптивность для мобильных - УЛУЧШЕННАЯ */
+/* Адаптивность для мобильных */
 @media (max-width: 768px) {
-    body {
-        padding-bottom: 70px;
-    }
-    
     h1 {
-        font-size: 1.8rem;
-        padding: 0 0.8rem;
+        font-size: 2rem;
     }
     
     h2 {
-        font-size: 1.5rem;
-        padding-bottom: 8px;
-    }
-    
-    h2::after {
-        width: 40px;
-        height: 3px;
+        font-size: 1.8rem;
     }
     
     .nav-menu {
         flex-direction: column;
         align-items: stretch;
-        padding: 0 0.8rem;
     }
     
     .nav-menu li {
         width: 100%;
-        margin: 0.3rem 0;
+        margin: 5px 0;
     }
     
     .nav-menu a {
         display: block;
         text-align: center;
-        padding: 0.8rem;
-        font-size: 0.9rem;
-        margin: 0.2rem 0;
-    }
-    
-    main {
-        padding: 0 10px 30px;
-        width: 100%;
-        max-width: 100%;
+        padding: 1rem;
     }
     
     section {
-        padding: 1.5rem;
-        margin: 0.8rem 0;
-        border-radius: 12px;
-        width: 100%;
+        padding: 2rem;
+        margin: 1rem;
     }
     
-    /* Исправление для правил безопасности */
     .rule-list li {
-        padding: 1.2rem;
-        padding-left: 2.2rem;
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
+        padding: 1.5rem;
+        padding-left: 3.5rem;
     }
     
     .rule-list li::before {
-        width: 1.8rem;
-        height: 1.8rem;
-        left: 0.6rem;
-        top: 1.2rem;
-        font-size: 0.9rem;
-    }
-    
-    /* Исправление для вопросов теста */
-    .question {
-        padding: 1.2rem;
-        margin-bottom: 1.2rem;
-    }
-    
-    .question p {
+        width: 2.5rem;
+        height: 2.5rem;
+        left: -1.25rem;
         font-size: 1rem;
-        padding-right: 35px;
-        line-height: 1.4;
     }
     
-    .question label {
-        padding: 0.8rem;
-        padding-left: 2.5rem;
-        font-size: 0.9rem;
-        margin: 0.6rem 0;
-        line-height: 1.3;
-    }
-    
-    .question::before {
-        width: 25px;
-        height: 25px;
-        font-size: 0.75rem;
-    }
-    
-    /* Исправление длинных паролей в тесте */
-    .question label br {
-        display: none;
-    }
-    
-    .question label {
-        word-break: break-word;
-        hyphens: auto;
+    .question {
+        padding: 1.5rem;
     }
     
     button {
         width: 100%;
         margin: 0.5rem 0;
-        padding: 0.9rem 1.5rem;
-        font-size: 0.95rem;
-        min-width: auto;
     }
     
     .score-circle {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .score-circle::before {
         width: 100px;
         height: 100px;
     }
     
-    .score-circle::before {
-        width: 85px;
-        height: 85px;
-    }
-    
     .score-circle span {
-        font-size: 1.7rem;
+        font-size: 2rem;
     }
-    
-    #quizResult {
-        padding: 1.5rem;
-        margin: 1.5rem 0;
-    }
-    
-    footer {
-        padding: 1rem;
-        font-size: 0.85rem;
-    }
-    
-    /* Декоративные элементы скрываем на мобильных */
-    .decoration {
-        display: none;
-    }
-}
-
-/* Для очень маленьких экранов */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.6rem;
-    }
-    
-    h2 {
-        font-size: 1.3rem;
-    }
-    
-    section {
-        padding: 1.2rem;
-    }
-    
-    .rule-list li {
-        padding: 1rem;
-        padding-left: 2rem;
-    }
-    
-    .rule-list li::before {
-        width: 1.6rem;
-        height: 1.6rem;
-        left: 0.5rem;
-        top: 1rem;
-        font-size: 0.8rem;
-    }
-    
-    .question p {
-        font-size: 0.95rem;
-    }
-    
-    .question label {
-        font-size: 0.85rem;
-        padding: 0.7rem;
-        padding-left: 2.2rem;
-    }
-    
-    button {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
-    }
-}
-
-/* Специальные стили для очень длинного текста */
-.long-password {
-    font-size: 0.8rem !important;
-    word-break: break-all !important;
-    font-family: 'Courier New', monospace;
 }
 
 /* Иконки */
 .icon {
     display: inline-block;
-    margin-right: 8px;
-    font-size: 1em;
+    margin-right: 10px;
+    font-size: 1.2em;
 }
 
 /* Счетчик вопросов */
@@ -686,14 +538,13 @@ footer p {
     display: inline-block;
     background: var(--secondary-color);
     color: white;
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: bold;
     margin-bottom: 1rem;
-    font-size: 0.9rem;
 }
 
-/* Декоративные элементы */
+/* Декоративные элементы - ВОЗВРАЩЕНЫ */
 .decoration {
     position: fixed;
     pointer-events: none;
@@ -733,69 +584,4 @@ a:hover {
 /* Для страницы с тестом - дополнительный отступ */
 .quiz-page main {
     padding-bottom: 60px;
-}
-
-/* Стили для модального окна поделиться - исправлены */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 1rem;
-}
-
-.modal-content {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 15px;
-    max-width: 500px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    position: relative;
-}
-
-.modal-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #7f8c8d;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.modal-close:hover {
-    background: #f8f9fa;
-    color: #e74c3c;
-}
-
-/* Анимация дрожания для незаполненных вопросов */
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-    20%, 40%, 60%, 80% { transform: translateX(8px); }
-}
-
-.shake-animation {
-    animation: shake 0.5s ease-in-out;
-}
-
-/* Стиль для незаполненного вопроса */
-.question:focus-within {
-    border-left-color: #3498db !important;
 }
