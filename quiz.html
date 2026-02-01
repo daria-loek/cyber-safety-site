@@ -60,12 +60,12 @@
                     <label><input type="radio" name="q1" value="0"> Это точно банк — у них же есть моё имя. Быстро введу пароль и удалю письмо</label>
                 </div>
 
-                <!-- Вопрос 2 - сложный про пароли -->
+               <!-- Вопрос 2 - сложный про пароли -->
                 <div class="question" data-question-number="2">
                     <p>Какой из этих паролей НАИБОЛЕЕ уязвим для атаки по словарю, несмотря на кажущуюся сложность?</p>
                     <label><input type="radio" name="q2" value="0"> Winter2024!Spring2024!</label>
                     <label><input type="radio" name="q2" value="0"> CorrectHorseBatteryStaple</label>
-                    <label><input type="radio" name="q2" value="1"> P@ssw0rd123!@#</label>
+                    <label><input type="radio" name="q2" value="1"><span class="long-password">P@ssw0rd123!@#</span></label>
                     <label><input type="radio" name="q2" value="0"> Мойпаролькоторыйниктонеугадает</label>
                 </div>
 
@@ -490,7 +490,7 @@
             return false; // Предотвращаем стандартное поведение
         }
         
-        // Функция для кнопки "Поделиться результатом"
+              // Функция для кнопки "Поделиться результатом" - ИСПРАВЛЕНА
         function shareResults() {
             const score = document.getElementById('correctCount').textContent;
             const percentage = document.getElementById('percentage').textContent;
@@ -499,83 +499,84 @@
             // Создаем текст для копирования
             const text = `Я прошел сложный тест по кибербезопасности и набрал ${score}/10 баллов (${percentage}%)! Мой уровень: ${level}. Проверьте свои знания: ${window.location.href}`;
             
-            // Создаем всплывающее окно с результатами
-            const shareModal = document.createElement('div');
-            shareModal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-            `;
-            
-            shareModal.innerHTML = `
-                <div style="
-                    background: white;
-                    padding: 2rem;
-                    border-radius: 20px;
-                    max-width: 500px;
-                    width: 90%;
-                    text-align: center;
-                    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-                ">
-                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">
-                        <i class="fas fa-share-alt" style="color: #9b59b6;"></i> Поделиться результатом
-                    </h3>
-                    
-                    <textarea id="shareText" readonly style="
-                        width: 100%;
-                        height: 100px;
-                        padding: 1rem;
-                        border: 2px solid #e0e0e0;
-                        border-radius: 10px;
-                        margin: 1rem 0;
-                        font-family: inherit;
-                        font-size: 0.9rem;
-                        resize: none;
-                        background: #f8f9fa;
-                    ">${text}</textarea>
-                    
-                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                        <button id="copyBtn" style="
-                            background: linear-gradient(45deg, #3498db, #2980b9);
-                            color: white;
-                            border: none;
-                            padding: 0.8rem 1.5rem;
-                            border-radius: 50px;
-                            cursor: pointer;
-                            font-weight: 600;
-                            display: flex;
-                            align-items: center;
-                            gap: 8px;
-                        ">
-                            <i class="fas fa-copy"></i> Копировать текст
-                        </button>
+            // Создаем модальное окно
+            const modalHTML = `
+                <div class="modal-overlay" id="shareModal">
+                    <div class="modal-content">
+                        <button class="modal-close" id="closeModalBtn">&times;</button>
+                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">
+                            <i class="fas fa-share-alt" style="color: #9b59b6;"></i> Поделиться результатом
+                        </h3>
                         
-                        <button id="closeBtn" style="
-                            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
-                            color: white;
-                            border: none;
-                            padding: 0.8rem 1.5rem;
-                            border-radius: 50px;
-                            cursor: pointer;
-                            font-weight: 600;
-                            display: flex;
-                            align-items: center;
-                            gap: 8px;
-                        ">
-                            <i class="fas fa-times"></i> Закрыть
-                        </button>
+                        <textarea id="shareText" readonly style="
+                            width: 100%;
+                            height: 100px;
+                            padding: 1rem;
+                            border: 2px solid #e0e0e0;
+                            border-radius: 10px;
+                            margin: 1rem 0;
+                            font-family: inherit;
+                            font-size: 0.9rem;
+                            resize: none;
+                            background: #f8f9fa;
+                        ">${text}</textarea>
+                        
+                        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                            <button id="copyBtn" style="
+                                background: linear-gradient(45deg, #3498db, #2980b9);
+                                color: white;
+                                border: none;
+                                padding: 0.8rem 1.5rem;
+                                border-radius: 50px;
+                                cursor: pointer;
+                                font-weight: 600;
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                            ">
+                                <i class="fas fa-copy"></i> Копировать текст
+                            </button>
+                            
+                            <button id="closeBtn" style="
+                                background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+                                color: white;
+                                border: none;
+                                padding: 0.8rem 1.5rem;
+                                border-radius: 50px;
+                                cursor: pointer;
+                                font-weight: 600;
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                            ">
+                                <i class="fas fa-times"></i> Закрыть
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
             
-            document.body.appendChild(shareModal);
+            // Добавляем модальное окно на страницу
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // Функция закрытия модального окна
+            function closeModal() {
+                const modal = document.getElementById('shareModal');
+                if (modal) {
+                    modal.remove();
+                }
+            }
+            
+            // Обработчики событий
+            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+            document.getElementById('closeBtn').addEventListener('click', closeModal);
+            
+            // Закрытие при клике на оверлей
+            document.getElementById('shareModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
             
             // Функция копирования в буфер обмена
             document.getElementById('copyBtn').addEventListener('click', function() {
@@ -599,6 +600,7 @@
                 } catch (err) {
                     alert('Нажмите Ctrl+C (Cmd+C на Mac), чтобы скопировать текст.');
                 }
+         
             });
             
             // Функция закрытия модального окна
@@ -656,6 +658,6 @@
         `;
         document.head.appendChild(style);
     </script>
-
+    
  // Добавляем CSS для анимации дрожания
  const style = document.createElement
