@@ -637,24 +637,5 @@
                 });
             }
         });
-
-        // Добавляем CSS для анимации дрожания
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-                20%, 40%, 60%, 80% { transform: translateX(10px); }
-            }
-            
-            .shake-animation {
-                animation: shake 0.5s ease-in-out;
-            }
-            
-            /* Стиль для незаполненного вопроса */
-            .question:focus-within {
-                border-left-color: #3498db !important;
-            }
-        `;
         document.head.appendChild(style);
     </script>
