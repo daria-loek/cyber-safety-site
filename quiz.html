@@ -146,10 +146,10 @@
                         <i class="fas fa-exclamation-circle icon"></i> 
                         Вопросы требуют внимательного анализа. Проверьте ответы!
                     </p>
-                    <button type="button" id="submitQuiz">
+                    <button type="button" id="submitQuiz" class="check-quiz-btn">
                         <i class="fas fa-paper-plane icon"></i> Завершить тест
                     </button>
-                    <button type="button" id="resetQuizBtn" class="secondary">
+                    <button type="button" id="resetQuizBtn" class="secondary reset-quiz-btn">
                         <i class="fas fa-redo icon"></i> Начать заново
                     </button>
                 </div>
@@ -186,10 +186,10 @@
                 </div>
                 
                 <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                    <button onclick="resetQuiz()" class="secondary">
+                    <button class="secondary reset-results-btn" onclick="resetQuiz()">
                         <i class="fas fa-redo icon"></i> Пройти еще раз
                     </button>
-                    <button onclick="window.location.href='rules.html'" class="success">
+                    <button class="success" onclick="window.location.href='rules.html'">
                         <i class="fas fa-book icon"></i> Изучить правила
                     </button>
                     <button onclick="shareResults()" style="background: linear-gradient(45deg, #2c3e50, #34495e);">
@@ -205,6 +205,11 @@
     </footer>
 
     <script>
+        // Глобальные функции для доступа из onclick
+        window.checkQuiz = checkQuiz;
+        window.resetQuiz = resetQuiz;
+        window.shareResults = shareResults;
+
         // Правильные ответы
         const correctAnswers = {
             q1: '1',
@@ -269,10 +274,12 @@
                 
                 if (!selected) {
                     allAnswered = false;
-                    unansweredQuestions.push({
-                        element: questionElement,
-                        number: i
-                    });
+                    if (questionElement) {
+                        unansweredQuestions.push({
+                            element: questionElement,
+                            number: i
+                        });
+                    }
                 }
             }
             
@@ -298,6 +305,8 @@
 
         // Основная функция проверки теста
         function checkQuiz() {
+            console.log('checkQuiz вызван');
+            
             // Сначала проверяем, все ли вопросы заполнены
             const validation = validateAllQuestions();
             
@@ -385,10 +394,14 @@
             
             // Настраиваем круглый счетчик
             const scoreCircle = document.getElementById('scoreCircle');
-            scoreCircle.style.setProperty('--score-percent', `${percentage}%`);
+            if (scoreCircle) {
+                scoreCircle.style.setProperty('--score-percent', `${percentage}%`);
+            }
             
             // Настраиваем прогресс-бар
-            progressFill.style.width = `${percentage}%`;
+            if (progressFill) {
+                progressFill.style.width = `${percentage}%`;
+            }
             
             // Определяем уровень знаний
             let level = "";
@@ -417,10 +430,12 @@
             knowledgeLevel.style.color = levelColor;
             
             // Выбираем случайный комментарий
-            const comments = resultComments[commentCategory];
-            const randomComment = comments[Math.floor(Math.random() * comments.length)];
-            commentText.textContent = randomComment;
-            resultComment.style.display = 'block';
+            if (resultComment && commentText) {
+                const comments = resultComments[commentCategory];
+                const randomComment = comments[Math.floor(Math.random() * comments.length)];
+                commentText.textContent = randomComment;
+                resultComment.style.display = 'block';
+            }
             
             // Текст результата
             if (score === totalQuestions) {
@@ -434,28 +449,34 @@
             }
             
             // Показываем правильные ответы
-            correctAnswersList.innerHTML = '';
-            for (let i = 1; i <= totalQuestions; i++) {
-                const div = document.createElement('div');
-                div.className = 'correct-answer';
-                div.innerHTML = `<strong>Вопрос ${i}:</strong> ${explanations[`q${i}`]}`;
-                correctAnswersList.appendChild(div);
+            if (correctAnswersList) {
+                correctAnswersList.innerHTML = '';
+                for (let i = 1; i <= totalQuestions; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'correct-answer';
+                    div.innerHTML = `<strong>Вопрос ${i}:</strong> ${explanations[`q${i}`]}`;
+                    correctAnswersList.appendChild(div);
+                }
             }
             
             // Показываем блок результатов
-            resultDiv.style.display = 'block';
-            
-            // Плавно прокручиваем к результату
-            setTimeout(() => {
-                resultDiv.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }, 300);
+            if (resultDiv) {
+                resultDiv.style.display = 'block';
+                
+                // Плавно прокручиваем к результату
+                setTimeout(() => {
+                    resultDiv.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 300);
+            }
         }
         
         // Функция сброса теста
         function resetQuiz() {
+            console.log('resetQuiz вызван');
+            
             // Сбрасываем все радиокнопки
             const allRadios = document.querySelectorAll('input[type="radio"]');
             allRadios.forEach(radio => {
@@ -472,21 +493,35 @@
             });
             
             // Скрываем результат
-            document.getElementById('quizResult').style.display = 'none';
-            document.getElementById('resultComment').style.display = 'none';
+            const resultDiv = document.getElementById('quizResult');
+            const resultComment = document.getElementById('resultComment');
+            
+            if (resultDiv) resultDiv.style.display = 'none';
+            if (resultComment) resultComment.style.display = 'none';
             
             // Прокручиваем к началу теста
-            document.querySelector('.quiz-intro').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
+            const quizIntro = document.querySelector('.quiz-intro');
+            if (quizIntro) {
+                quizIntro.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
         
         // Функция для кнопки "Поделиться результатом"
         function shareResults() {
-            const score = document.getElementById('correctCount').textContent;
-            const percentage = document.getElementById('percentage').textContent;
-            const level = document.getElementById('knowledgeLevel').textContent;
+            console.log('shareResults вызван');
+            
+            const correctCount = document.getElementById('correctCount');
+            const percentageSpan = document.getElementById('percentage');
+            const knowledgeLevel = document.getElementById('knowledgeLevel');
+            
+            if (!correctCount || !percentageSpan || !knowledgeLevel) return;
+            
+            const score = correctCount.textContent;
+            const percentage = percentageSpan.textContent;
+            const level = knowledgeLevel.textContent;
             
             const text = `Я прошел тест по кибербезопасности и набрал ${score}/10 баллов (${percentage}%)! Мой уровень: ${level}. Проверьте свои знания: ${window.location.href}`;
             
@@ -555,92 +590,62 @@
                 }
             }
             
-            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
-            document.getElementById('closeBtn').addEventListener('click', closeModal);
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const shareModal = document.getElementById('shareModal');
+            const copyBtn = document.getElementById('copyBtn');
             
-            document.getElementById('shareModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal();
-                }
-            });
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
             
-            document.getElementById('copyBtn').addEventListener('click', function() {
-                const textarea = document.getElementById('shareText');
-                textarea.select();
-                textarea.setSelectionRange(0, 99999);
-                
-                try {
-                    const successful = document.execCommand('copy');
-                    if (successful) {
-                        const copyBtn = document.getElementById('copyBtn');
-                        const originalText = copyBtn.innerHTML;
-                        copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                        copyBtn.style.background = 'linear-gradient(45deg, #27ae60, #229954)';
-                        
-                        setTimeout(() => {
-                            copyBtn.innerHTML = originalText;
-                            copyBtn.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
-                        }, 2000);
+            if (shareModal) {
+                shareModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeModal();
                     }
-                } catch (err) {
-                    alert('Нажмите Ctrl+C (Cmd+C на Mac), чтобы скопировать текст.');
-                }
-            });
+                });
+            }
+            
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function() {
+                    const textarea = document.getElementById('shareText');
+                    if (!textarea) return;
+                    
+                    textarea.select();
+                    textarea.setSelectionRange(0, 99999);
+                    
+                    try {
+                        const successful = document.execCommand('copy');
+                        if (successful) {
+                            const copyBtn = document.getElementById('copyBtn');
+                            if (copyBtn) {
+                                const originalText = copyBtn.innerHTML;
+                                copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                                copyBtn.style.background = 'linear-gradient(45deg, #27ae60, #229954)';
+                                
+                                setTimeout(() => {
+                                    copyBtn.innerHTML = originalText;
+                                    copyBtn.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
+                                }, 2000);
+                            }
+                        }
+                    } catch (err) {
+                        alert('Нажмите Ctrl+C (Cmd+C на Mac), чтобы скопировать текст.');
+                    }
+                });
+            }
         }
 
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM загружен');
+            
             // Добавляем обработчик для кнопки отправки
             const submitButton = document.getElementById('submitQuiz');
             if (submitButton) {
-                submitButton.addEventListener('click', checkQuiz);
+                submitButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    checkQuiz();
+                });
             }
             
-            // Добавляем обработчик для кнопки сброса
-            const resetButton = document.getElementById('resetQuizBtn');
-            if (resetButton) {
-                resetButton.addEventListener('click', resetQuiz);
-            }
-        });
-
-        // Добавляем CSS для анимации дрожания
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-                20%, 40%, 60%, 80% { transform: translateX(10px); }
-            }
-            
-            .shake-animation {
-                animation: shake 0.5s ease-in-out;
-            }
-            
-            .modal-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-                padding: 1rem;
-            }
-            
-            .modal-content {
-                background: white;
-                padding: 1.5rem;
-                border-radius: 15px;
-                max-width: 500px;
-                width: 100%;
-                text-align: center;
-                box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-                position: relative;
-            }
-            
-            .modal-close {
-                position: absolute;
-                top
