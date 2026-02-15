@@ -205,11 +205,6 @@
     </footer>
 
     <script>
-        // Глобальные функции для доступа из onclick
-        window.checkQuiz = checkQuiz;
-        window.resetQuiz = resetQuiz;
-        window.shareResults = shareResults;
-
         // Правильные ответы
         const correctAnswers = {
             q1: '1',
@@ -649,3 +644,14 @@
                 });
             }
             
+            // Добавляем обработчик для кнопки сброса
+            const resetButton = document.getElementById('resetQuizBtn');
+            if (resetButton) {
+                resetButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    resetQuiz();
+                });
+            }
+        });
+
+       
