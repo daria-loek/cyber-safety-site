@@ -660,3 +660,68 @@
             }
         });
 
+        // Добавляем CSS для анимации дрожания и модального окна
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+                20%, 40%, 60%, 80% { transform: translateX(10px); }
+            }
+            
+            .shake-animation {
+                animation: shake 0.5s ease-in-out;
+            }
+            
+            .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                padding: 1rem;
+            }
+            
+            .modal-content {
+                background: white;
+                padding: 1.5rem;
+                border-radius: 15px;
+                max-width: 500px;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+                position: relative;
+            }
+            
+            .modal-close {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #7f8c8d;
+                cursor: pointer;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+            }
+            
+            .modal-close:hover {
+                background: #f8f9fa;
+                color: #e74c3c;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
